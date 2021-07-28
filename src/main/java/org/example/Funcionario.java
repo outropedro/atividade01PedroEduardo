@@ -155,6 +155,8 @@ class Funcionarios{
             System.out.println("Inisra a dara de nascimento do(a) funcionario(a):  ");
             dataRecebida = teclado.nextLine();
             teclado.nextLine();
+            teclado.nextLine();
+            teclado.nextLine();
 
             Date dataFormatada = formato.parse(dataRecebida);
             setNascimento(dataFormatada);
@@ -173,6 +175,7 @@ class Funcionarios{
 
             System.out.println("Você deseja cadastrar mais funcionario?\nSim\nNão");
             opcaoCadastro = teclado.nextLine();
+            teclado.nextLine();
             if(opcaoCadastro.equals("Sim")){
                 cadastraFuncionario();
             }
@@ -188,6 +191,8 @@ class Funcionarios{
     }
 
     public void emitirRelatorio() throws ParseException {
+        int contM = 0, contF = 0;
+        int idadeTotal = 0, idadeTotalM = 0, idadeTotalF = 0, mediaIdadeGeral, mediaIdadeF, mediaIdadeM;
 
         if(bdFuncionarios.size()<10){
             System.out.println("Não teem 10 funcionarios cadastrados ainda, favor cadastrar.");
@@ -199,7 +204,32 @@ class Funcionarios{
 
                 while (it.hasNext()) {
                     System.out.println(it.next());
+
+                    if(sexo.equals("Feminino")){
+                        contF++;
+                        idadeTotalF += idade;
+                    }
+                    else if(sexo.equals("Masculino")){
+                        contM++;
+                        idadeTotalM += idade;
+
+                    }
+                    idadeTotal += idade;
+
                 }
+
+                int totalS=contM + contF;
+                int percentualF = (totalS - contF)*100;
+                int percentualM = (totalS - contM)*100;
+                mediaIdadeGeral = idadeTotal/totalS;
+                mediaIdadeF = idadeTotalF/contF;
+                mediaIdadeM = idadeTotalM/contM;
+                System.out.println("A quantidade de funcionairios do sexo feminino é " + contF + " representando " + percentualF + "%");
+                System.out.println("A quantidade de funcionairios do sexo masculino é " + contM + " representando " + percentualM + "%");
+                System.out.println("A media de idade dos funcionarios é " + mediaIdadeGeral + " anos.");
+                System.out.println("A idade de  idade das funcionarias do sexo feminino é de " + mediaIdadeF + "anos.");
+                System.out.println("A idade de  idade das funcionarios do sexo masculino é de " + mediaIdadeM + "anos.");
+
             }
         }
     }

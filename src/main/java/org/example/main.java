@@ -25,9 +25,6 @@ public class main
         else if (opcao == 2){
             funcionarios.emitirRelatorio();
         }
-        else if(opcao ==3){
-
-        }
         else{
             System.out.println("Opção invalida, selecione uma opção.");
         }
